@@ -54,3 +54,18 @@ diagnosisSubmit?.addEventListener('click', (event) => {
     diagnosisHelp.textContent = 'Selecciona primero qué le pasó a tu moto.';
   }
 });
+
+const photoTrack = document.querySelector('[data-photo-track]');
+const photoSlides = photoTrack?.querySelectorAll('.photo-slide');
+const photoPrev = document.querySelector('[data-carousel-prev]');
+const photoNext = document.querySelector('[data-carousel-next]');
+
+const movePhotos = (direction) => {
+  if (!photoTrack || !photoSlides?.length) return;
+  const slideGap = Number.parseFloat(getComputedStyle(photoTrack).columnGap || getComputedStyle(photoTrack).gap || '18') || 18;
+  const slideWidth = photoSlides[0].getBoundingClientRect().width + slideGap;
+  photoTrack.scrollBy({ left: direction * slideWidth, behavior: 'smooth' });
+};
+
+photoPrev?.addEventListener('click', () => movePhotos(-1));
+photoNext?.addEventListener('click', () => movePhotos(1));
