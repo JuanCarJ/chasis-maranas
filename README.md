@@ -12,6 +12,10 @@ python3 -m http.server 4174
 
 Luego abrir [http://127.0.0.1:4174/](http://127.0.0.1:4174/).
 
+## Producción
+
+La demo está publicada en [https://chasis-maranas.vercel.app/](https://chasis-maranas.vercel.app/) mediante el proyecto Vercel `chasis-maranas`.
+
 ## Alcance de esta demo
 
 - Página estática responsive, sin backend ni formulario que envíe datos.
