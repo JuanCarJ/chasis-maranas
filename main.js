@@ -24,3 +24,33 @@ const updateHeader = () => {
 };
 updateHeader();
 window.addEventListener('scroll', updateHeader, { passive: true });
+
+const diagnosisButtons = document.querySelectorAll('[data-diagnosis]');
+const diagnosisSubmit = document.querySelector('[data-diagnosis-submit]');
+const diagnosisHelp = document.querySelector('[data-diagnosis-help]');
+
+diagnosisButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    diagnosisButtons.forEach((item) => {
+      item.classList.remove('is-selected');
+      item.setAttribute('aria-pressed', 'false');
+    });
+
+    button.classList.add('is-selected');
+    button.setAttribute('aria-pressed', 'true');
+
+    const issue = button.dataset.diagnosis;
+    const message = `Hola, vi la página de Chasis Marañas. Mi moto: ${issue}. Quiero enviarles fotos para consultar la reparación.`;
+    diagnosisSubmit.href = `https://wa.me/573117353516?text=${encodeURIComponent(message)}`;
+    diagnosisSubmit.classList.remove('is-disabled');
+    diagnosisSubmit.setAttribute('aria-disabled', 'false');
+    diagnosisHelp.textContent = `Consulta preparada: ${issue}.`;
+  });
+});
+
+diagnosisSubmit?.addEventListener('click', (event) => {
+  if (diagnosisSubmit.getAttribute('aria-disabled') === 'true') {
+    event.preventDefault();
+    diagnosisHelp.textContent = 'Selecciona primero qué le pasó a tu moto.';
+  }
+});
